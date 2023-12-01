@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [ "$(id -u)" = "0" ]; then
+    echo "This command must be executed without root initially!"
+    exit 1
+fi
+
+pkill xfsettingsd
+cd /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/
+sudo sed -i '/<channel name="xfce4-panel"/c\<channel name="xfce4-panel" version="1.0">' xfce4-panel.xml
+sudo sed -i '/<channel name="xfce4-desktop"/c\<channel name="xfce4-desktop" version="1.0">' xfce4-desktop.xml
+sudo rm -rf /etc/xdg/xfce4/kiosk/kioskrc
+
+reboot
