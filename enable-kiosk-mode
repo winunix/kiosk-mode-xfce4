@@ -1,8 +1,16 @@
 #!/bin/bash
 
+if [ "$(id -u)" = "0" ]; then
+    echo "This command must be executed without root initially!"
+    exit 1
+fi
+
 pkill xfsettingsd
 cd /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/
-sudo mv ~/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml .
-sudo mv ~/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml .
+HOMEDIR=$(echo ~)
+sudo mv $HOMEDIR/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml .
+sudo mv $HOMEDIR/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml .
 sed -i '/<channel name="xfce4-panel"/c\<channel name="xfce4-panel" version="1.0" locked="*" unlocked="root">' xfce4-panel.xml
 sed -i '/<channel name="xfce4-desktop"/c\<channel name="xfce4-desktop" version="1.0" locked="*" unlocked="root">' xfce4-desktop.xml
+
+reboot
