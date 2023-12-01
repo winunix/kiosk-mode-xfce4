@@ -1,0 +1,11 @@
+Package: kiosk-mode-xfce4
+Version: 0.0.1
+Installed-Size: 2
+Maintainer: ailtonbsj <ailton.ifce@gmail.com>
+Section: utils
+Architecture: all
+Priority: optional
+Depends: xfce4
+Homepage: https://github.com/winunix/kiosk-mode-xfce4
+Description: A tool for easy enable xfce4 kiosk mode.
+ Avoid modification on wallpapers and panel (taskbar) on XFCE4 environment.
