@@ -6,8 +6,9 @@ if [ "$(id -u)" = "0" ]; then
 fi
 
 pkill xfsettingsd
-cd /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/
+
 HOMEDIR=$(echo ~)
+cd /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/
 sudo mv $HOMEDIR/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml .
 sudo mv $HOMEDIR/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml .
 sudo sed -i '/<channel name="xfce4-panel"/c\<channel name="xfce4-panel" version="1.0" locked="*" unlocked="root">' xfce4-panel.xml
@@ -18,5 +19,9 @@ cat << EOF | sudo tee /etc/xdg/xfce4/kiosk/kioskrc
 [xfce4-session]
 SaveSession=NONE
 EOF
+
+sudo mkdir -p /etc/skel/.config/xfce4/panel/
+cd /etc/skel/.config/xfce4/panel/
+sudo cp -r $HOMEDIR/.config/xfce4/panel/* .
 
 reboot
