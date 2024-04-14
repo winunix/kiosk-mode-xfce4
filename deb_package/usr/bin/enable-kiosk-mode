@@ -24,4 +24,6 @@ sudo mkdir -p /etc/skel/.config/xfce4/panel/
 cd /etc/skel/.config/xfce4/panel/
 sudo cp -r $HOMEDIR/.config/xfce4/panel/* .
 
-reboot
+if [ "$1" != "--no-reboot" ]; then
+    reboot
+fi

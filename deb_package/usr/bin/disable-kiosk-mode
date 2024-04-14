@@ -11,4 +11,6 @@ sudo sed -i '/<channel name="xfce4-panel"/c\<channel name="xfce4-panel" version=
 sudo sed -i '/<channel name="xfce4-desktop"/c\<channel name="xfce4-desktop" version="1.0">' xfce4-desktop.xml
 sudo rm -rf /etc/xdg/xfce4/kiosk/kioskrc
 
-reboot
+if [ "$1" != "--no-reboot" ]; then
+    reboot
+fi
